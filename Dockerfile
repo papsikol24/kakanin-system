@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-RUN pecl install mongodb && docker-php-ext-enable mongodb
+# Install MongoDB extension properly
+RUN pecl install mongodb && \
+    echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
