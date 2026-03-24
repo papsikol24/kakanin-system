@@ -1,5 +1,6 @@
 <?php
-// MongoDB Database Connection for Render
+// Load Composer autoloader
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class MongoDBConnection {
     private static $instance = null;
@@ -9,6 +10,11 @@ class MongoDBConnection {
     private function __construct() {
         try {
             $connectionString = getenv("MONGODB_URI");
+            
+            if (!$connectionString) {
+                // Try Railway's default variable
+                $connectionString = getenv("MONGO_URL");
+            }
             
             if (!$connectionString) {
                 throw new Exception("MONGODB_URI environment variable not set");
@@ -53,10 +59,6 @@ function getDb() {
 
 function getCollection($name) {
     return MongoDBConnection::getInstance()->getCollection($name);
-}
-
-function objectId($id) {
-    return new MongoDB\BSON\ObjectId($id);
 }
 
 function formatDocument($doc) {

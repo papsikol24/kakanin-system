@@ -13,9 +13,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install MongoDB extension properly
-RUN pecl install mongodb && \
-    echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
+RUN pecl install mongodb && docker-php-ext-enable mongodb
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -23,7 +21,8 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html/
 
-RUN composer install --no-interaction --optimize-autoloader --no-dev || true
+# Run composer install to install MongoDB library
+RUN composer install --no-interaction --optimize-autoloader
 
 EXPOSE 8000
 
