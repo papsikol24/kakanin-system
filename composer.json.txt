@@ -1,0 +1,9 @@
+{
+    "name": "jens-kakanin/kakanin-system",
+    "description": "Online Ordering System for Jen's Kakanin",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "mongodb/mongodb": "^1.15"
+    }
+}
