@@ -1,5 +1,8 @@
 FROM php:8.2-apache
 
+# First, remove all MPM modules before installing anything else
+RUN rm -f /etc/apache2/mods-enabled/mpm_*.load || true
+
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -17,16 +20,8 @@ RUN pecl install mongodb && docker-php-ext-enable mongodb
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Fix Apache MPM conflict - remove all MPMs first, then enable prefork
-RUN a2dismod mpm_event mpm_worker mpm_prefork || true && \
-    a2enmod mpm_prefork
-
-RUN a2enmod rewrite
-
-# Create a custom Apache config to ensure only prefork is loaded
-RUN echo "LoadModule mpm_prefork_module /usr/lib/apache2/modules/mod_mpm_prefork.so" > /etc/apache2/mods-available/mpm_prefork.load && \
-    echo "LoadModule mpm_prefork_module /usr/lib/apache2/modules/mod_mpm_prefork.so" > /etc/apache2/mods-enabled/mpm_prefork.load && \
-    rm -f /etc/apache2/mods-enabled/mpm_event.load /etc/apache2/mods-enabled/mpm_worker.load 2>/dev/null || true
+# Ensure only prefork is enabled
+RUN a2enmod mpm_prefork rewrite
 
 WORKDIR /var/www/html
 
