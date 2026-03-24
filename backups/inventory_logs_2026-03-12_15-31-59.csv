@@ -1,0 +1,39 @@
+﻿Date/Time,Product,User,"Change Type","Quantity Changed","Previous Stock","New Stock"
+"2026-03-12 10:17:02",Puto,System,subtract,20,380,360
+"2026-03-12 10:16:46",Puto,System,subtract,19,399,380
+"2026-03-10 11:59:19",Puto,System,subtract,20,420,400
+"2026-03-10 11:59:12",Puto,System,subtract,19,439,420
+"2026-03-10 10:54:02","Ube Halaya",admin,add,300,0,300
+"2026-03-10 10:53:57",Suman,admin,add,300,0,300
+"2026-03-10 10:53:52","Special Suman Latik",admin,add,300,0,300
+"2026-03-10 10:53:47","Special Puto Kutsinta",admin,add,300,0,300
+"2026-03-10 10:53:42","Special Palitaw",admin,add,300,0,300
+"2026-03-10 10:53:36","Special Black Kutsinta",admin,add,300,0,300
+"2026-03-10 10:53:31","Special Biko",admin,add,300,0,300
+"2026-03-10 10:53:26",Sapin-sapin,admin,add,300,0,300
+"2026-03-10 10:53:18",Palitaw,admin,add,300,0,300
+"2026-03-10 10:53:14","Maja Blanca",admin,add,300,0,300
+"2026-03-10 10:53:10",Kutsinta,admin,add,300,0,300
+"2026-03-10 10:53:05","Cassava Cake",admin,add,300,0,300
+"2026-03-10 10:53:01",Biko,admin,add,300,0,300
+"2026-03-10 10:52:55",Bibingka,admin,add,300,0,300
+"2026-03-10 10:39:20",Puto,System,subtract,20,460,440
+"2026-03-10 10:39:10",Puto,System,subtract,17,477,460
+"2026-03-10 10:28:33",Puto,System,subtract,20,500,480
+"2026-03-10 10:28:26",Puto,admin,add,500,0,500
+"2026-03-10 10:27:41",Puto,System,subtract,19,19,0
+"2026-03-10 09:07:47",Puto,System,subtract,20,40,20
+"2026-03-10 09:07:34",Puto,System,subtract,19,59,40
+"2026-03-10 09:03:39",Puto,System,subtract,20,80,60
+"2026-03-10 09:03:31",Puto,System,subtract,19,99,80
+"2026-03-10 08:57:53",Puto,System,subtract,20,120,100
+"2026-03-10 08:57:46",Puto,System,subtract,19,139,120
+"2026-03-10 08:55:40",Puto,System,subtract,20,160,140
+"2026-03-10 08:55:24",Puto,System,subtract,19,179,160
+"2026-03-10 08:45:21",Puto,System,subtract,20,200,180
+"2026-03-10 08:45:12",Puto,System,subtract,19,219,200
+"2026-03-10 08:38:09",Puto,System,subtract,20,240,220
+"2026-03-10 08:37:57",Puto,System,subtract,19,259,240
+"2026-03-10 08:28:27",Puto,System,subtract,20,280,260
+"2026-03-10 08:28:19",Puto,System,subtract,19,299,280
+"2026-03-10 08:28:01",Puto,admin,add,300,0,300

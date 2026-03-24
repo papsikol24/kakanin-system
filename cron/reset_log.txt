@@ -1,0 +1,20 @@
+[23/02/2026 17:04:28.63] ========== STARTING DAILY RESET ========== 
+[23/02/2026 17:04:28.63] Script started 
+[23/02/2026 17:04:28.63] Running PHP script... 
+Daily reset started at 2026-02-23 10:04:28
+Daily reset completed successfully at 2026-02-23 10:04:28
+Archived 0 orders and 40 inventory logs from 2026-02-22
+[23/02/2026 17:04:28.63] Script finished with error code: 0 
+[23/02/2026 17:04:28.63] ✅ SUCCESS: Daily reset completed 
+[23/02/2026 17:04:28.63] ========== END OF SCRIPT ========== 
+ 
+[23/02/2026 17:10:07.35] ========== STARTING DAILY RESET ========== 
+[23/02/2026 17:10:07.35] Script started 
+[23/02/2026 17:10:07.35] Running PHP script... 
+Daily reset started at 2026-02-23 10:10:07
+Daily reset completed successfully at 2026-02-23 10:10:07
+Archived 0 orders and 40 inventory logs from 2026-02-22
+[23/02/2026 17:10:07.35] Script finished with error code: 0 
+[23/02/2026 17:10:07.35] ✅ SUCCESS: Daily reset completed 
+[23/02/2026 17:10:07.35] ========== END OF SCRIPT ========== 
+ 

@@ -1,0 +1,192 @@
+# Enable URL rewriting
+RewriteEngine On
+RewriteBase /
+
+# ===== REMOVE .PHP EXTENSION =====
+# This allows URLs like /dashboard instead of /dashboard.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# ===== LANDING PAGE =====
+RewriteRule ^$ index.php [L]
+RewriteRule ^home$ index.php [L]
+
+# ===== STAFF ROUTES =====
+RewriteRule ^staff-dashboard$ staff-dashboard.php [L]
+RewriteRule ^staff-login$ staff-login.php [L]
+
+# ===== CUSTOMER ROUTES =====
+RewriteRule ^login$ login.php [L]
+RewriteRule ^dashboard$ customer-dashboard.php [L]
+RewriteRule ^signup$ signup.php [L]
+RewriteRule ^menu$ menu.php [L]
+RewriteRule ^cart$ cart.php [L]
+RewriteRule ^checkout$ checkout.php [L]
+RewriteRule ^about$ about.php [L]
+RewriteRule ^forgot-password$ forgot-password-customer.php [L]
+RewriteRule ^reset-password$ reset_password.php [L]
+RewriteRule ^logout$ logout.php [L]
+
+# ===== INVENTORY MODULE =====
+RewriteRule ^inventory$ modules/inventory/index.php [L]
+RewriteRule ^inventory/add$ modules/inventory/add.php [L]
+RewriteRule ^inventory/edit/([0-9]+)$ modules/inventory/edit.php?id=$1 [L]
+RewriteRule ^inventory/delete/([0-9]+)$ modules/inventory/delete.php?id=$1 [L]
+
+# ===== ORDERS MODULE =====
+RewriteRule ^orders$ modules/orders/index.php [L]
+RewriteRule ^orders/create$ modules/orders/create.php [L]
+RewriteRule ^orders/view/([0-9]+)$ modules/orders/view.php?id=$1 [L]
+
+# ===== CUSTOMERS MODULE =====
+RewriteRule ^customers$ modules/customers/index.php [L]
+RewriteRule ^customers/add$ modules/customers/add.php [L]
+RewriteRule ^customers/edit/([0-9]+)$ modules/customers/edit.php?id=$1 [L]
+RewriteRule ^customers/delete/([0-9]+)$ modules/customers/delete.php?id=$1 [L]
+
+# ===== REPORTS MODULE =====
+RewriteRule ^reports/sales$ modules/reports/sales.php [L]
+RewriteRule ^reports/inventory$ modules/reports/inventory.php [L]
+RewriteRule ^reports/export-sales$ modules/reports/export_sales.php [L]
+RewriteRule ^reports/export-inventory$ modules/reports/export_inventory.php [L]
+
+# ===== USERS MODULE =====
+RewriteRule ^users$ modules/users/index.php [L]
+RewriteRule ^users/add$ modules/users/add.php [L]
+RewriteRule ^users/edit/([0-9]+)$ modules/users/edit.php?id=$1 [L]
+RewriteRule ^users/delete/([0-9]+)$ modules/users/delete.php?id=$1 [L]
+
+# ===== TOOLS MODULE =====
+RewriteRule ^tools$ modules/tools/index.php [L]
+RewriteRule ^tools/backup$ modules/tools/backup.php [L]
+RewriteRule ^tools/activity-logs$ modules/tools/activity_logs.php [L]
+RewriteRule ^tools/system-health$ modules/tools/system_health.php [L]
+RewriteRule ^tools/daily-reset$ modules/tools/setup_daily_reset.php [L]
+
+# ===== ADMIN TOOLS =====
+RewriteRule ^admin/cleanup$ admin/cleanup_transaction.php [L]
+RewriteRule ^admin/force-cleanup$ admin/force_cleanup.php [L]
+RewriteRule ^admin/clear-customer$ admin/clear_customer_session.php [L]
+RewriteRule ^admin/debug-checkout$ admin/debug_checkout_fixed.php [L]
+RewriteRule ^admin/fix-duplicate-cashiers$ admin/fix_duplicate_cashiers.php [L]
+RewriteRule ^admin/reset-counter$ admin/reset_counter.php [L]
+RewriteRule ^admin/check-counter$ admin/check_counter.php [L]
+RewriteRule ^admin/setup-daily-reset$ admin/setup_daily_reset.php [L]
+
+# ===== SUCCESS & RECEIPT PAGES =====
+RewriteRule ^order-success/([0-9]+)$ order-success.php?id=$1 [L]
+RewriteRule ^receipt/([0-9]+)$ print_receipt.php?id=$1 [L]
+
+# ===== API ROUTES =====
+RewriteRule ^api/get-realtime-data$ api/get_realtime_data.php [L]
+RewriteRule ^api/clear-access$ api/clear_access.php [L]
+RewriteRule ^api/test-connection$ api/test_connection.php [L]
+
+# Reset Cashier Performance
+RewriteRule ^admin/reset-cashier-performance$ admin/reset_cashier_performance.php [L]
+
+# Activity Logs
+RewriteRule ^tools/activity-logs$ modules/tools/activity_logs.php [L]
+
+# API
+RewriteRule ^api/get-realtime-activities$ api/get_realtime_activities.php [L]
+
+# ===== PWA ROUTES =====
+RewriteRule ^sw\.js$ sw.js [L]
+RewriteRule ^manifest\.json$ manifest.json [L]
+RewriteRule ^offline$ offline.html [L]
+
+# ===== PREVENT DIRECTORY LISTING =====
+Options -Indexes
+
+# ===== PROTECT SENSITIVE FILES =====
+<FilesMatch "^(config\.php|auth\.php|cart_functions\.php|daily_counter\.php)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ===== ERROR DOCUMENTS =====
+ErrorDocument 404 /errors/404.php
+ErrorDocument 403 /errors/404.php
+ErrorDocument 500 /errors/500.php
+
+# ===== PWA & SERVICE WORKER CACHE CONTROL =====
+<IfModule mod_headers.c>
+    # Service Worker - NO CACHE (critical)
+    <FilesMatch "sw\.js$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+        Header set Service-Worker-Allowed "/"
+    </FilesMatch>
+    
+    # Manifest - cache for 1 week
+    <FilesMatch "manifest\.json$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+    
+    # HTML/PHP files - no cache
+    <FilesMatch "\.(html|php)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
+    
+    # API endpoints - no cache
+    <FilesMatch "^api/.*\.php$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
+</IfModule>
+
+# ===== CACHE CONTROL FOR BETTER PERFORMANCE =====
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Default expiration
+    ExpiresDefault "access plus 1 month"
+    
+    # Images - 1 year cache
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # CSS & JavaScript - 1 month cache
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # Fonts - 1 year cache
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ===== COMPRESSION FOR FASTER LOADING =====
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE font/ttf font/otf font/woff font/woff2
+</IfModule>
+
+# ===== SECURITY HEADERS =====
+<IfModule mod_headers.c>
+    # Prevent MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Enable XSS protection
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Prevent clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # Referrer policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

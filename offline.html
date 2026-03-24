@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Offline - Jen's Kakanin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #008080 0%, #20b2aa 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M20 50 L30 40 L40 50 L50 30 L60 50 L70 30 L80 50 L90 40" stroke="white" fill="none" stroke-width="2"/><circle cx="30" cy="60" r="3" fill="white"/><circle cx="70" cy="60" r="3" fill="white"/></svg>');
+            background-size: 200px 200px;
+            animation: move 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes move {
+            from { background-position: 0 0; }
+            to { background-position: 200px 200px; }
+        }
+
+        .offline-card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.5s ease;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .offline-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+            display: inline-block;
+            background: #f0f0f0;
+            width: 120px;
+            height: 120px;
+            line-height: 120px;
+            border-radius: 50%;
+            color: #008080;
+            box-shadow: 0 10px 20px rgba(0,128,128,0.2);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .features {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-item i {
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .feature-item .fa-check-circle { color: #28a745; }
+        .feature-item .fa-times-circle { color: #dc3545; }
+        .feature-item .fa-exclamation-circle { color: #ffc107; }
+
+        .feature-item span {
+            color: #555;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .menu-preview {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 25px 0;
+            border: 2px dashed #008080;
+        }
+
+        .menu-preview h4 {
+            color: #008080;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-preview h4 i {
+            color: #ff8c00;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item .item-name {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .menu-item .item-price {
+            color: #008080;
+            font-weight: 700;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 480px) {
+            .button-group {
+                flex-direction: row;
+            }
+        }
+
+        .btn-menu {
+            background: linear-gradient(135deg, #008080, #20b2aa);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 1;
+            box-shadow: 0 5px 15px rgba(0,128,128,0.3);
+            -webkit-tap-highlight-color: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-menu:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,128,128,0.4);
+        }
+
+        .btn-menu:active {
+            transform: scale(0.98);
+        }
+
+        .btn-retry {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 1;
+            box-shadow: 0 5px 15px rgba(108,117,125,0.3);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-retry:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(108,117,125,0.4);
+        }
+
+        .btn-retry:active {
+            transform: scale(0.98);
+        }
+
+        .note {
+            margin-top: 20px;
+            padding: 10px;
+            background: #fff3cd;
+            border-radius: 10px;
+            color: #856404;
+            font-size: 0.85rem;
+            border-left: 4px solid #ffc107;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .note i {
+            font-size: 1.2rem;
+            color: #ffc107;
+        }
+
+        footer {
+            margin-top: 25px;
+            color: #999;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        footer i {
+            color: #008080;
+        }
+
+        /* Loading spinner for retry button */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Custom offline indicator */
+        .offline-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 480px) {
+            .offline-card {
+                padding: 25px 20px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .offline-icon {
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                font-size: 4rem;
+            }
+            
+            .btn-menu, .btn-retry {
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-indicator">
+        <i class="fas fa-wifi-slash me-1"></i> Offline Mode
+    </div>
+
+    <div class="offline-card">
+        <div class="offline-icon">
+            📶
+        </div>
+        
+        <h1>You're Offline</h1>
+        
+        <p class="subtitle">Don't worry! You can still browse our menu and view products. They'll be ready when you're back online.</p>
+
+        <div class="features">
+            <div class="feature-item">
+                <i class="fas fa-check-circle"></i>
+                <span><strong>Browse complete menu</strong> - View all products and prices</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-times-circle"></i>
+                <span><strong>Add to cart</strong> - Requires internet connection</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-times-circle"></i>
+                <span><strong>Place orders</strong> - Need to be online to checkout</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-check-circle"></i>
+                <span><strong>View saved products</strong> - Cached menu available</span>
+            </div>
+        </div>
+
+        <!-- Cached Menu Preview -->
+        <div class="menu-preview">
+            <h4>
+                <i class="fas fa-utensils"></i>
+                Available Offline
+            </h4>
+            <div class="menu-item">
+                <span class="item-name">Puto</span>
+                <span class="item-price">₱5.00</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Kutsinta</span>
+                <span class="item-price">₱8.00</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Bibingka</span>
+                <span class="item-price">₱15.00</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Biko</span>
+                <span class="item-price">₱20.00</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Special Bilao</span>
+                <span class="item-price">₱250.00</span>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="/menu" class="btn-menu" id="browseMenuBtn">
+                <i class="fas fa-utensils me-2"></i> Browse Menu
+            </a>
+            <button class="btn-retry" onclick="retryConnection()" id="retryBtn">
+                <i class="fas fa-sync-alt me-2"></i> Try Again
+            </button>
+        </div>
+
+        <div class="note">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>Note:</strong> The menu is cached and will load even without internet. 
+                Add to cart and checkout will work once you're back online.
+            </div>
+        </div>
+
+        <footer>
+            <i class="fas fa-store"></i>
+            <span>Jen's Kakanin - Available offline</span>
+        </footer>
+    </div>
+
+    <script>
+        // Function to retry connection
+        function retryConnection() {
+            const retryBtn = document.getElementById('retryBtn');
+            retryBtn.innerHTML = '<span class="spinner"></span> Checking...';
+            retryBtn.disabled = true;
+            
+            // Check if we're back online
+            if (navigator.onLine) {
+                window.location.reload();
+            } else {
+                // Still offline
+                setTimeout(() => {
+                    retryBtn.innerHTML = '<i class="fas fa-sync-alt me-2"></i> Try Again';
+                    retryBtn.disabled = false;
+                    
+                    // Show alert that we're still offline
+                    alert('Still offline. Please check your internet connection.');
+                }, 1500);
+            }
+        }
+
+        // Listen for online event to auto-reload
+        window.addEventListener('online', function() {
+            // Show a brief message before reloading
+            const retryBtn = document.getElementById('retryBtn');
+            retryBtn.innerHTML = '<span class="spinner"></span> Online! Reloading...';
+            retryBtn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+
+        // Preload the menu page in the background when offline page loads
+        // This ensures the menu is in cache if not already
+        if ('caches' in window) {
+            caches.open('kakanin-pwa-v2').then(cache => {
+                cache.add('/menu').catch(() => {
+                    console.log('Menu already cached or failed to cache');
+                });
+            });
+        }
+
+        // Track if user tries to access cart or checkout
+        document.getElementById('browseMenuBtn').addEventListener('click', function(e) {
+            // No prevention needed - menu should work offline
+            console.log('Navigating to cached menu...');
+        });
+
+        // Add touch feedback for mobile
+        document.querySelectorAll('.btn-menu, .btn-retry').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+            btn.addEventListener('touchcancel', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Show current time to indicate page is live
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            // Could add a timestamp element if desired
+        }
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

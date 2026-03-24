@@ -1,0 +1,16 @@
+﻿ID,"Product Name",Description,Price,"Current Stock","Low Stock Threshold","Date Added","Times Ordered","Total Revenue"
+1,Puto,"Soft and fluffy rice cake, perfect for breakfast or merienda",5.00,360,10,2026-03-10,11,1100.00
+2,Kutsinta,"Brown rice cake topped with grated coconut, chewy and sweet",8.00,300,10,2026-03-10,0,0
+3,Bibingka,"Baked rice cake with salted egg and cheese, topped with butter",15.00,300,10,2026-03-10,0,0
+4,Biko,"Sweet sticky rice cake with coconut milk and brown sugar latik",20.00,300,10,2026-03-10,0,0
+5,"Cassava Cake","Dense and moist cassava based cake with custard topping",25.00,300,10,2026-03-10,0,0
+6,"Ube Halaya","Rich and creamy purple yam dessert, perfect for any occasion",30.00,300,10,2026-03-10,0,0
+7,"Maja Blanca","Coconut pudding with corn, smooth and creamy",12.00,300,10,2026-03-10,0,0
+8,Sapin-sapin,"Layered glutinous rice dessert with ube and coconut",22.00,300,10,2026-03-10,0,0
+9,Palitaw,"Sweet rice cakes coated with coconut and sesame seeds",15.00,300,10,2026-03-10,0,0
+10,"Special Puto Kutsinta","Assorted kakanin in bilao, perfect for parties",250.00,300,5,2026-03-10,0,0
+11,Suman,"Sticky rice wrapped in banana leaves, served with sugar",12.00,300,10,2026-03-10,0,0
+12,"Special Biko","Premium biko bilao with extra latik and toppings",250.00,300,10,2026-03-10,0,0
+13,"Special Palitaw","Premium palitaw bilao with extra coconut and sesame",250.00,300,10,2026-03-10,0,0
+14,"Special Black Kutsinta","Premium black kutsinta bilao with premium ingredients",250.00,300,10,2026-03-10,0,0
+15,"Special Suman Latik","Premium suman latik bilao with caramelized coconut",250.00,300,10,2026-03-10,0,0

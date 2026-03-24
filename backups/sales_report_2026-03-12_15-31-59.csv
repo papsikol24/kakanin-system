@@ -1,0 +1,12 @@
+﻿"Order ID",Date,Customer,"Total Amount","Payment Method",Status,"Delivery Address","Number of Items"
+11,"2026-03-12 10:17:02",Asislorentz,120.00,cash,pending,"Barangay 102 (Old Kawayan), near BhHajaj, Tacloban City",1
+10,"2026-03-10 11:59:19","Piolo Niño Salaño",120.00,cash,completed,"Barangay 6-A, Tacloban City",1
+9,"2026-03-10 10:39:20",Asislorentz,120.00,cash,completed,"Barangay 8-A, near Hh, Tacloban City",1
+8,"2026-03-10 10:28:33","Piolo Niño Salaño",120.00,cash,completed,"Barangay 6-A, Tacloban City",1
+7,"2026-03-10 09:07:47","Piolo Niño Salaño",120.00,cash,completed,"Barangay 19, Tacloban City",1
+6,"2026-03-10 09:03:39","Piolo Niño Salaño",120.00,cash,completed,"Barangay 20, Tacloban City",1
+5,"2026-03-10 08:57:53","Piolo Niño Salaño",120.00,cash,completed,"Barangay 19, Tacloban City",1
+4,"2026-03-10 08:55:40","Piolo Niño Salaño",120.00,cash,cancelled,"Barangay 20, Tacloban City",1
+3,"2026-03-10 08:45:21","Piolo Niño Salaño",120.00,cash,completed,"Barangay 20, Tacloban City",1
+2,"2026-03-10 08:38:09","Piolo Niño Salaño",120.00,cash,completed,"Barangay 19, Tacloban City",1
+1,"2026-03-10 08:28:27","Piolo Niño Salaño",120.00,cash,completed,"Barangay 18, Tacloban City",1
