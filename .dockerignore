@@ -7,6 +7,3 @@ docker-compose.yml
 *.log
 backups/
 assets/uploads/
-node_modules
-.vscode
-.idea

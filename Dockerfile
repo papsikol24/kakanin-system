@@ -22,7 +22,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html/
 
 # Run composer install to install MongoDB library
-RUN composer install --no-interaction --optimize-autoloader
+RUN composer install
 
 EXPOSE 8000
 

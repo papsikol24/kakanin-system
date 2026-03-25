@@ -12,7 +12,6 @@ class MongoDBConnection {
             $connectionString = getenv("MONGODB_URI");
             
             if (!$connectionString) {
-                // Try Railway's default variable
                 $connectionString = getenv("MONGO_URL");
             }
             
