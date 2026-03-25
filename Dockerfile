@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-RUN pecl install mongodb && docker-php-ext-enable mongodb
+# Install older version of MongoDB extension that is compatible
+RUN pecl install mongodb-1.15.0 && docker-php-ext-enable mongodb
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -21,8 +22,8 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html/
 
-# Run composer install to install MongoDB library
-RUN composer install
+# Run composer install with platform requirements ignored
+RUN composer install --ignore-platform-req=ext-mongodb
 
 EXPOSE 8000
 

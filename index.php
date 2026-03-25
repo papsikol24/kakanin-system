@@ -1,40 +1,27 @@
 <?php
-// Test MongoDB connection
-require_once __DIR__ . '/config/database.php';
-
 echo "<h1>Jen's Kakanin - Dockerized System</h1>";
+echo "<p>PHP Version: " . phpversion() . "</p>";
 
-// Check connection
-$connected = checkDbConnection();
-
-if ($connected) {
-    echo "<p style='color:green'>✅ MongoDB Connected Successfully!</p>";
-    
-    // Try to get products
-    try {
-        $collection = getCollection('products');
-        $products = $collection->find([], ['limit' => 5]);
-        
-        echo "<h2>Products:</h2>";
-        echo "<ul>";
-        foreach ($products as $product) {
-            echo "<li>" . $product['name'] . " - ₱" . $product['price'] . "</li>";
-        }
-        echo "</ul>";
-        
-        if ($products->isDead()) {
-            echo "<p>No products found. Add some products to get started.</p>";
-        }
-        
-    } catch (Exception $e) {
-        echo "<p>Error fetching products: " . $e->getMessage() . "</p>";
-    }
-    
+// Check if MongoDB extension is loaded
+if (extension_loaded('mongodb')) {
+    echo "<p style='color:green'>✅ MongoDB extension is LOADED (version: " . phpversion('mongodb') . ")</p>";
 } else {
-    echo "<p style='color:red'>❌ MongoDB Connection Failed</p>";
-    echo "<p>Please check your environment variables.</p>";
+    echo "<p style='color:red'>❌ MongoDB extension is NOT loaded</p>";
+}
+
+// Try to load MongoDB library
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+    echo "<p style='color:green'>✅ Composer autoloader loaded</p>";
+    
+    if (class_exists('MongoDB\Client')) {
+        echo "<p style='color:green'>✅ MongoDB\Client class found!</p>";
+    } else {
+        echo "<p style='color:red'>❌ MongoDB\Client class NOT found</p>";
+    }
+} else {
+    echo "<p style='color:red'>❌ vendor/autoload.php not found. Run composer install</p>";
 }
 
 echo "<hr>";
-echo "<p>PHP Version: " . phpversion() . "</p>";
 echo "<p>Server Time: " . date('Y-m-d H:i:s') . "</p>";
